@@ -1,0 +1,11 @@
+.joke {
+	padding: 2rem;
+	border: 1px solid black;
+	margin-bottom: 1rem;
+}
+
+.error {
+	color: red;
+	padding: 1rem;
+	border: 1px red solid;
+}

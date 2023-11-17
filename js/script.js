@@ -1,17 +1,56 @@
-const nameInput = document.querySelector("input");
-const saveButton = document.querySelector("#save");
-const deleteButton = document.querySelector("#delete");
+import { url } from "./constants.js";
 
-saveButton.addEventListener("click", saveToStorage);
-deleteButton.addEventListener("click", deleteFromStorage);
-
-function saveToStorage() {
-	const name = nameInput.value;
-	// sessionStorage.setItem("name", name);
-	localStorage.setItem("name", name);
-	// location.href = "favourites.html";
+async function fetchJokes() {
+	try {
+		const response = await fetch(url + "asd");
+		const results = await response.json();
+		displayJokes(results);
+	} catch (error) {
+		const container = document.querySelector("#jokes-container");
+		container.innerHTML = '<div class="error">An error occured fetching the jokes</div>';
+	}
 }
 
-function deleteFromStorage() {
-	localStorage.clear();
+fetchJokes();
+
+function displayJokes(jokes) {
+	const container = document.querySelector("#jokes-container");
+
+	container.innerHTML = "";
+
+	jokes.forEach(function (joke) {
+		const jokeItem = createJoke(joke);
+		container.append(jokeItem);
+
+		// container.innerHTML += `<div class="joke">
+		// 												<h3>${joke.type}</h3>
+		// 												<p>${joke.setup}</p>
+		// 												<p>${joke.punchline}</p>
+		// 											</div>`;
+	});
+}
+
+function createJoke(joke) {
+	// Create the outer div element
+	const jokeDiv = document.createElement("div");
+	jokeDiv.classList.add("joke");
+
+	// Create the h3 element for the type
+	const h3Element = document.createElement("h3");
+	h3Element.textContent = joke.type;
+
+	// Create the first p element for the setup
+	const setupParagraph = document.createElement("p");
+	setupParagraph.textContent = joke.setup;
+
+	// Create the second p element for the punchline
+	const punchlineParagraph = document.createElement("p");
+	punchlineParagraph.textContent = joke.punchline;
+
+	// Append the child elements to the jokeDiv
+	jokeDiv.append(h3Element);
+	jokeDiv.append(setupParagraph);
+	jokeDiv.append(punchlineParagraph);
+
+	return jokeDiv;
 }
