@@ -6,6 +6,7 @@ async function fetchJokes() {
 		const results = await response.json();
 		displayJokes(results);
 	} catch (error) {
+		console.log(error);
 		const container = document.querySelector("#jokes-container");
 		container.innerHTML = '<div class="error">An error occured fetching the jokes</div>';
 	}
@@ -26,6 +27,7 @@ function displayJokes(jokes) {
 		// 												<h3>${joke.type}</h3>
 		// 												<p>${joke.setup}</p>
 		// 												<p>${joke.punchline}</p>
+		// 												<a href="joke.html?id=${joke.id}">View details</a>
 		// 											</div>`;
 	});
 }
@@ -47,10 +49,16 @@ function createJoke(joke) {
 	const punchlineParagraph = document.createElement("p");
 	punchlineParagraph.textContent = joke.punchline;
 
+	const link = document.createElement("a");
+	link.classList.add("link");
+	link.textContent = "View details";
+	link.href = `joke.html?id=${joke.id}`;
+
 	// Append the child elements to the jokeDiv
 	jokeDiv.append(h3Element);
 	jokeDiv.append(setupParagraph);
 	jokeDiv.append(punchlineParagraph);
+	jokeDiv.append(link);
 
 	return jokeDiv;
 }
