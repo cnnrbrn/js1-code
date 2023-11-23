@@ -2,7 +2,7 @@ import { url } from "./constants.js";
 
 async function fetchJokes() {
 	try {
-		const response = await fetch(url + "asd");
+		const response = await fetch(url);
 		const results = await response.json();
 		displayJokes(results);
 	} catch (error) {
