@@ -1,4 +1,5 @@
 import { url } from "./constants.js";
+import { displayMessage } from "./ui/shared/displayMessage.js";
 
 async function fetchJokes() {
 	try {
@@ -7,8 +8,10 @@ async function fetchJokes() {
 		displayJokes(results);
 	} catch (error) {
 		console.log(error);
-		const container = document.querySelector("#jokes-container");
-		container.innerHTML = '<div class="error">An error occured fetching the jokes</div>';
+		displayMessage("#jokes-container", "An error occured fetching the jokes", "success");
+
+		// const container = document.querySelector("#jokes-container");
+		// container.innerHTML = '<div class="error">An error occured fetching the jokes</div>';
 	}
 }
 
