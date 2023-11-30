@@ -1,16 +1,8 @@
 import { url } from "./constants.js";
 import { displayMessage } from "./ui/shared/displayMessage.js";
 
-const queryString = document.location.search;
-const params = new URLSearchParams(queryString);
-const id = params.get("id");
-
-// const detailUrl = `${url}/${id}`;
-
-// console.log(detailUrl);
-
 async function fetchJoke(id) {
-	const detailUrl = `${url}ddd/${id}`;
+	const detailUrl = `${url}/${id}`;
 
 	try {
 		const response = await fetch(detailUrl);
@@ -24,27 +16,10 @@ async function fetchJoke(id) {
 	} catch (error) {
 		// console.error(error);
 
-		displayMessage("#joke-container", error.message, "error");
+		displayMessage("#joke-container", error.message);
 		// const container = document.querySelector("#joke-container");
 		// container.innerHTML = '<div class="error">There was an error fetching the joke</div>';
 	}
 }
 
 fetchJoke(id);
-
-function displayJoke(joke) {
-	document.title = `${joke.setup} | ${document.title}`;
-
-	const container = document.querySelector("#joke-container");
-
-	container.innerHTML = "";
-
-	const heading = document.createElement("h1");
-	heading.innerText = joke.setup;
-
-	const punchline = document.createElement("p");
-	punchline.innerText = joke.punchline;
-
-	container.append(heading);
-	container.append(punchline);
-}
