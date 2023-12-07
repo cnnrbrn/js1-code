@@ -1,12 +1,5 @@
-const product = {
-	id: 12,
-	name: "whateves",
-	description: "asdasd asd asd sad",
-};
+const colours = ["red", "blue", "green"];
 
-// const id = product.id;
+const [, secondColour, thirdColour] = colours;
 
-// object destructuring
-const { id: productId, name, description } = product;
-
-console.log(productId, name, description);
+console.log(secondColour, thirdColour);
